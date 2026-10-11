@@ -1,0 +1,251 @@
+x32dbg / x64dbg Malware Analysis Breakpoint Reference
+A classroom-oriented reference for Windows 10 x86/x64 dynamic analysis in an isolated FLARE-VM. Covers DLL/process injection, hollowing, thread activity, file writes, memory, anti-analysis, persistence, and network activity.
+Usage: The comma-separated bp lines are reference lists, not executable x32dbg commands. To set a group, paste one bp command per line into the x32dbg Script tab, or enter each command individually. Resolve exports against the actual loaded module (for example kernel32, kernelbase, ntdll, advapi32, ws2_32, wininet, winhttp, or dnsapi). Some functions are forwarded, absent, or inlined on particular builds. Avoid enabling every breakpoint simultaneously.
+
+1. DLL injection and process access
+Breakpoint	Evidence to record
+OpenProcess	Target PID, desired access, returned handle
+CreateProcessA	Executable, command line, creation flags, returned process/thread info
+CreateProcessW	Unicode executable and command line, creation flags
+LoadLibraryA	DLL path, returned module handle
+LoadLibraryW	Unicode DLL path, returned handle
+LoadLibraryExA	DLL path and load flags
+LoadLibraryExW	Unicode DLL path and load flags
+GetProcAddress	Requested symbol or ordinal, resolved address
+VirtualAllocEx	Process handle, base, size, allocation flags, protection
+VirtualProtectEx	Remote region, old/new protection
+WriteProcessMemory	Remote destination, local source, bytes requested/written
+ReadProcessMemory	Remote source, local destination, bytes read
+CreateRemoteThread	Target handle, start address, parameter, returned thread
+CreateRemoteThreadEx	Extended remote-thread parameters
+VirtualFreeEx	Released remote memory region
+CloseHandle	Closed process/thread handle
+
+
+Comma-separated breakpoint reference
+bp OpenProcess, bp CreateProcessA, bp CreateProcessW, bp LoadLibraryA, bp LoadLibraryW, bp LoadLibraryExA, bp LoadLibraryExW, bp GetProcAddress, bp VirtualAllocEx, bp VirtualProtectEx, bp WriteProcessMemory, bp ReadProcessMemory, bp CreateRemoteThread, bp CreateRemoteThreadEx, bp VirtualFreeEx, bp CloseHandle
+2. Process hollowing and image replacement
+Breakpoint	Evidence to record
+NtCreateUserProcess	Native process creation and resulting handles
+NtUnmapViewOfSection	Process handle and unmapped image base
+NtCreateSection	Section size, attributes, protection
+NtMapViewOfSection	Target process, mapped base and size
+NtWriteVirtualMemory	Target process, destination, buffer, length
+GetThreadContext	Thread context and instruction pointer
+SetThreadContext	Modified instruction pointer/registers
+Wow64GetThreadContext	WOW64 thread context
+Wow64SetThreadContext	Modified WOW64 context
+ResumeThread	Thread handle and prior suspend count
+NtResumeThread	Native resume and suspend count
+
+
+Comma-separated breakpoint reference
+bp NtCreateUserProcess, bp NtUnmapViewOfSection, bp NtCreateSection, bp NtMapViewOfSection, bp NtWriteVirtualMemory, bp GetThreadContext, bp SetThreadContext, bp Wow64GetThreadContext, bp Wow64SetThreadContext, bp ResumeThread, bp NtResumeThread
+3. Thread activity and APC injection
+Breakpoint	Evidence to record
+CreateThread	Local start address, parameter, thread ID
+CreateRemoteThread	Remote start address and target handle
+NtCreateThreadEx	Native thread creation parameters
+QueueUserAPC	APC routine, thread handle, argument
+NtQueueApcThread	Native APC routine and arguments
+NtQueueApcThreadEx	Extended APC queueing parameters
+OpenThread	Target thread ID and access rights
+SuspendThread	Thread handle and suspend count
+ResumeThread	Thread handle and previous suspend count
+NtSuspendThread	Native thread suspension
+NtResumeThread	Native thread resumption
+GetThreadContext	Register values
+SetThreadContext	Register modifications
+WaitForSingleObject	Handle and timeout
+WaitForMultipleObjects	Handles, wait mode, timeout
+ExitThread	Thread exit code
+TerminateThread	Forced termination and exit code
+
+
+Comma-separated breakpoint reference
+bp CreateThread, bp CreateRemoteThread, bp NtCreateThreadEx, bp QueueUserAPC, bp NtQueueApcThread, bp NtQueueApcThreadEx, bp OpenThread, bp SuspendThread, bp ResumeThread, bp NtSuspendThread, bp NtResumeThread, bp GetThreadContext, bp SetThreadContext, bp WaitForSingleObject, bp WaitForMultipleObjects, bp ExitThread, bp TerminateThread
+4. File creation, writes, and dropped DLLs
+Breakpoint	Evidence to record
+CreateFileA	File path, desired access, disposition
+CreateFileW	Unicode path, desired access, disposition
+WriteFile	File handle, source buffer, bytes written
+ReadFile	File handle, destination buffer, bytes read
+NtCreateFile	Native path, desired access, disposition
+NtWriteFile	Native file handle and write buffer
+NtReadFile	Native file handle and read buffer
+CopyFileA	Source and destination
+CopyFileW	Unicode source and destination
+MoveFileA	Old and new paths
+MoveFileW	Unicode old and new paths
+MoveFileExA	Source, destination, flags
+MoveFileExW	Unicode paths and flags
+DeleteFileA	Deleted file path
+DeleteFileW	Unicode deleted file path
+SetFileAttributesA	Path and attributes
+SetFileAttributesW	Unicode path and attributes
+GetTempPathA	Temporary directory
+GetTempPathW	Unicode temporary directory
+GetTempFileNameA	Generated temporary path
+GetTempFileNameW	Unicode generated temporary path
+CreateFileMappingA	File handle, section size and protection
+CreateFileMappingW	Unicode mapping name and protection
+MapViewOfFile	Mapping handle, base and size
+UnmapViewOfFile	Unmapped base
+FlushFileBuffers	File handle being flushed
+
+
+Comma-separated breakpoint reference
+bp CreateFileA, bp CreateFileW, bp WriteFile, bp ReadFile, bp NtCreateFile, bp NtWriteFile, bp NtReadFile, bp CopyFileA, bp CopyFileW, bp MoveFileA, bp MoveFileW, bp MoveFileExA, bp MoveFileExW, bp DeleteFileA, bp DeleteFileW, bp SetFileAttributesA, bp SetFileAttributesW, bp GetTempPathA, bp GetTempPathW, bp GetTempFileNameA, bp GetTempFileNameW, bp CreateFileMappingA, bp CreateFileMappingW, bp MapViewOfFile, bp UnmapViewOfFile, bp FlushFileBuffers
+5. Memory allocation, unpacking, and executable regions
+Breakpoint	Evidence to record
+VirtualAlloc	Local allocation base, size, protection
+VirtualAllocEx	Remote allocation base, size, protection
+VirtualProtect	Local protection change
+VirtualProtectEx	Remote protection change
+VirtualQuery	Local memory region metadata
+VirtualQueryEx	Remote region metadata
+NtAllocateVirtualMemory	Native allocation base and size
+NtProtectVirtualMemory	Native protection changes
+NtFreeVirtualMemory	Native memory release
+NtMapViewOfSection	Section view base and size
+RtlMoveMemory	Copy source, destination, length, if callable
+RtlCopyMemory	Copy source, destination, length, if exported (often inlined)
+HeapAlloc	Heap handle, size, returned pointer
+HeapFree	Heap handle and released pointer
+
+
+Comma-separated breakpoint reference
+bp VirtualAlloc, bp VirtualAllocEx, bp VirtualProtect, bp VirtualProtectEx, bp VirtualQuery, bp VirtualQueryEx, bp NtAllocateVirtualMemory, bp NtProtectVirtualMemory, bp NtFreeVirtualMemory, bp NtMapViewOfSection, bp RtlMoveMemory, bp RtlCopyMemory, bp HeapAlloc, bp HeapFree
+6. Debugging avoidance and anti-analysis
+Breakpoint	Evidence to record
+IsDebuggerPresent	Debugger-present return value
+CheckRemoteDebuggerPresent	Target handle and debugger-present output parameter
+NtQueryInformationProcess	Information class (e.g., debug port/object/flags) and result
+NtQuerySystemInformation	Information class and output buffer
+OutputDebugStringA	Debug string and control-flow context
+OutputDebugStringW	Unicode debug string
+GetThreadContext	Thread debug registers/context
+SetUnhandledExceptionFilter	New exception handler
+AddVectoredExceptionHandler	Registered handler address
+RemoveVectoredExceptionHandler	Removed handler
+RaiseException	Exception code and flags
+QueryPerformanceCounter	High-resolution timing checks
+GetTickCount	Elapsed-time checks
+GetTickCount64	64-bit elapsed-time checks
+Sleep	Requested delay
+NtDelayExecution	Native delay interval
+FindWindowA	Searched window class/title
+FindWindowW	Unicode window search
+CreateToolhelp32Snapshot	Enumeration flags and target PID
+Process32FirstW	Initial process enumeration result
+Process32NextW	Subsequent process enumeration
+GetModuleHandleA	Module presence checks
+GetModuleHandleW	Unicode module presence checks
+GetComputerNameA	Hostname checks
+GetComputerNameW	Unicode hostname checks
+GetSystemInfo	CPU/page-size information
+GetNativeSystemInfo	Native architecture information
+GetCursorPos	Cursor movement/user activity checks
+
+
+Comma-separated breakpoint reference
+bp IsDebuggerPresent, bp CheckRemoteDebuggerPresent, bp NtQueryInformationProcess, bp NtQuerySystemInformation, bp OutputDebugStringA, bp OutputDebugStringW, bp GetThreadContext, bp SetUnhandledExceptionFilter, bp AddVectoredExceptionHandler, bp RemoveVectoredExceptionHandler, bp RaiseException, bp QueryPerformanceCounter, bp GetTickCount, bp GetTickCount64, bp Sleep, bp NtDelayExecution, bp FindWindowA, bp FindWindowW, bp CreateToolhelp32Snapshot, bp Process32FirstW, bp Process32NextW, bp GetModuleHandleA, bp GetModuleHandleW, bp GetComputerNameA, bp GetComputerNameW, bp GetSystemInfo, bp GetNativeSystemInfo, bp GetCursorPos
+Beyond API breakpoints: In x86, malware may inspect the PEB through FS:[30h] and the BeingDebugged byte at PEB offset 0x02 without calling an API. Inspect disassembly and cross-references; an API breakpoint will not catch that direct read. NtQueryInformationProcess classes commonly associated with debugger checks include ProcessDebugPort (7), ProcessDebugObjectHandle (0x1E), and ProcessDebugFlags (0x1F).
+
+7. Persistence and registry modifications
+Breakpoint	Evidence to record
+RegOpenKeyExA	Opened key and access
+RegOpenKeyExW	Unicode key and access
+RegCreateKeyExA	Created key and disposition
+RegCreateKeyExW	Unicode key creation
+RegSetValueExA	Value name, type, data
+RegSetValueExW	Unicode value name, type, data
+RegQueryValueExA	Value read and type
+RegQueryValueExW	Unicode value read
+RegDeleteValueA	Deleted value
+RegDeleteValueW	Unicode deleted value
+RegDeleteKeyA	Deleted key
+RegDeleteKeyW	Unicode deleted key
+NtSetValueKey	Native value modification
+NtCreateKey	Native key creation
+CreateServiceA	Service name, binary path, startup type
+CreateServiceW	Unicode service creation
+StartServiceA	Service started
+StartServiceW	Unicode service start
+OpenSCManagerA	SCM access rights
+OpenSCManagerW	Unicode SCM access
+ChangeServiceConfigA	Service configuration changes
+ChangeServiceConfigW	Unicode configuration changes
+
+
+Comma-separated breakpoint reference
+bp RegOpenKeyExA, bp RegOpenKeyExW, bp RegCreateKeyExA, bp RegCreateKeyExW, bp RegSetValueExA, bp RegSetValueExW, bp RegQueryValueExA, bp RegQueryValueExW, bp RegDeleteValueA, bp RegDeleteValueW, bp RegDeleteKeyA, bp RegDeleteKeyW, bp NtSetValueKey, bp NtCreateKey, bp CreateServiceA, bp CreateServiceW, bp StartServiceA, bp StartServiceW, bp OpenSCManagerA, bp OpenSCManagerW, bp ChangeServiceConfigA, bp ChangeServiceConfigW
+8. Network activity
+Breakpoint	Evidence to record
+connect	Destination IP and port
+WSAConnect	Winsock destination and socket
+send	Outbound buffer and length
+recv	Inbound buffer and length
+sendto	Datagram destination and data
+recvfrom	Datagram source and data
+getaddrinfo	Hostname and resolved addresses
+gethostbyname	Legacy DNS resolution
+InternetOpenA	WinINet initialization
+InternetOpenW	Unicode WinINet initialization
+InternetConnectA	Host, port, service
+InternetConnectW	Unicode host and service
+HttpOpenRequestA	HTTP method and path
+HttpOpenRequestW	Unicode HTTP method and path
+HttpSendRequestA	HTTP headers and optional body
+HttpSendRequestW	Unicode request headers
+InternetReadFile	Response buffer and bytes read
+WinHttpConnect	Host and port
+WinHttpSendRequest	Request headers and body
+WinHttpReceiveResponse	Response availability
+WinHttpReadData	Response data
+DnsQuery_A	DNS query name and type
+DnsQuery_W	Unicode DNS query
+
+
+Comma-separated breakpoint reference
+bp connect, bp WSAConnect, bp send, bp recv, bp sendto, bp recvfrom, bp getaddrinfo, bp gethostbyname, bp InternetOpenA, bp InternetOpenW, bp InternetConnectA, bp InternetConnectW, bp HttpOpenRequestA, bp HttpOpenRequestW, bp HttpSendRequestA, bp HttpSendRequestW, bp InternetReadFile, bp WinHttpConnect, bp WinHttpSendRequest, bp WinHttpReceiveResponse, bp WinHttpReadData, bp DnsQuery_A, bp DnsQuery_W
+9. Core breakpoint set: dllinject.exe lab
+Breakpoint	Evidence to record
+LoadLibraryA	Module name and returned handle (actual import may resolve through an alias)
+GetProcAddress	Resolved LoadLibraryA address
+CreateProcessA	Target executable, creation flags, process/thread handles
+VirtualAllocEx	Remote allocation size, protection and returned base
+WriteProcessMemory	DLL path bytes, destination and length
+CreateRemoteThread	Start address, parameter, returned thread handle
+Sleep	Delay interval
+ResumeThread	Primary thread handle and return
+ExitProcess	Injector exit code
+
+
+Comma-separated breakpoint reference
+bp LoadLibraryA, bp GetProcAddress, bp CreateProcessA, bp VirtualAllocEx, bp WriteProcessMemory, bp CreateRemoteThread, bp Sleep, bp ResumeThread, bp ExitProcess
+Evidence checklist
+- [ ] Identify source process and target process/PID.
+- [ ] Record process handle and requested access rights.
+- [ ] Record remote allocation base, size and protection.
+- [ ] Verify each memory write falls inside the tracked allocation.
+- [ ] Inspect source bytes and distinguish a DLL path from executable payload bytes.
+- [ ] Correlate thread start address and parameter with the allocated memory.
+- [ ] Record return values and error codes; a breakpoint hit is not proof of success.
+- [ ] Check Process Hacker memory regions and Procmon file/registry activity.
+- [ ] Investigate anti-debugging and environment checks if execution differs under a debugger.
+- [ ] Capture debugger screenshots and note the VM snapshot used.
+x86 argument reminder
+At a typical 32-bit stdcall API entry, [ESP] is the return address, [ESP+4] is the first argument, [ESP+8] the second, and so on. Examine EAX after the call for a return value when appropriate. On x64 Windows, the first four integer/pointer arguments are normally in RCX, RDX, R8, and R9.
+Caveats
+- CreateProcessA/W, LoadLibraryA/W, and other exports may forward into KernelBase.dll on Windows 10.
+- Native Nt* functions are usually in ntdll.dll.
+- RtlCopyMemory and similar routines may be macros/inlined, so an exported symbol breakpoint may not exist.
+- Some APIs are not available on every Windows version or may not yet be loaded into the debuggee.
+- A memory region marked RWX is an investigative lead, not proof of malicious injection.
+- Use only in an isolated, authorized analysis environment.
+Useful documentation
+- x64dbg documentation
+- Microsoft Windows API documentation
+- MITRE ATT&CK: Process Injection (T1055)
+- MITRE ATT&CK: Debugger Evasion (T1622)
