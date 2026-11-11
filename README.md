@@ -4,6 +4,12 @@
 
 Welcome to the course repository for CYBR 4531 FA. This repository serves as the distribution hub for students to access malware samples required for laboratory assignments, reverse engineering tasks, and behavioral analysis.
 
+## Final Practical Review — CSCI 4531
+
+Read the **[student final-exam review](final_exam_review.md)** for the case format,
+suggested timing, required tools, study topics, and evidence expectations.
+Final-exam packages and case passwords are distributed through D2L.
+
 ⚠️ **WARNING:** This repository contains live, dangerous malware samples. These files are intended strictly for educational and research purposes within a controlled environment. 
 
 ---
