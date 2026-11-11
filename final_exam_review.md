@@ -130,10 +130,14 @@ Relevant observed event row/detail:
 - Use **actual observed values**. PIDs and loaded addresses can differ between runs.
 - Include only relevant output or event details and identify their source.
 - A conclusion needs support; a tool name or an unsupported statement is not evidence.
-- Images and file attachments are enabled on every question.
+- Enter your answers, commands, event details, and YARA rules **directly in the D2L
+  answer fields**. Do not replace your responses with uploaded answer documents,
+  raw log files, or separate rule files.
+- Use screenshots only when they help support a finding. The image and attachment
+  controls remain available, but you are not expected to upload separate answer files.
 - One screenshot is required for the Case 5 debugger success demonstration, showing
-  the MessageBox together with x32dbg identifying the supplied file. Other images
-  and attachments are optional unless the instructor announces otherwise.
+  the MessageBox together with x32dbg identifying the supplied file. Other
+  screenshots are optional unless the instructor announces otherwise.
 - Retain required text such as a rule or command when the question requests it;
   an optional screenshot does not replace that text.
 
@@ -185,7 +189,7 @@ specifically requests an image. Focus on clear evidence, not the number of image
 - Open the required tools on the assigned VM and report missing tools early.
 - Have the approved pocket references available in the permitted form.
 - Practice with instructor-approved class artifacts in the isolated VM.
-- Know where you can save working copies, evidence, and files for attachment.
+- Know where you can save working copies and capture relevant screenshots.
 - Be comfortable making a short, labeled report rather than a long narrative.
 
 Download the final-exam package from the instructor's D2L area before starting,
