@@ -148,6 +148,22 @@ captures and repeated images of the same result.
 stating what it shows and why it supports your answer. Identify the question or
 finding it relates to. A screenshot by itself is not a complete answer.
 
+#### Standard screenshot caption
+
+Copy this template beneath each screenshot or into the answer beside its attachment.
+Keep the finding and explanation brief and specific to the evidence shown.
+
+```text
+Question:
+Finding:
+Relevant address/value:
+Why this evidence supports the finding:
+```
+
+Use the question identifier to connect the image to your answer. Report the actual
+address or value visible in the image; if neither applies, write `Not applicable`.
+Complete the final line with a short explanation, not just a repeated tool name.
+
 **For debugging screenshots, show the details you discuss.** Include the relevant
 instruction/call or branch address and enough surrounding code to establish
 context. If your explanation relies on a register, return value, branch outcome,
