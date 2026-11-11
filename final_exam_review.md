@@ -137,6 +137,21 @@ Relevant observed event row/detail:
 - Retain required text such as a rule or command when the question requests it;
   an optional screenshot does not replace that text.
 
+### Screenshots: be selective and explain them
+
+**Screenshots may be included, but you do not need to screenshot everything.**
+Choose a screenshot only when it helps support a specific finding. Keep the
+relevant tool, filename, field, or output readable; avoid unnecessary full-desktop
+captures and repeated images of the same result.
+
+**Every screenshot must have a short explanation**—usually one or two sentences
+stating what it shows and why it supports your answer. Identify the question or
+finding it relates to. A screenshot by itself is not a complete answer.
+
+The Case 5 debugger screenshot is still required. For other questions, concise
+written observations and relevant text output are sufficient unless the question
+specifically requests an image. Focus on clear evidence, not the number of images.
+
 ## Before exam day
 
 - Open the required tools on the assigned VM and report missing tools early.
