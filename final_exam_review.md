@@ -7,7 +7,7 @@ artifacts, use the assigned tools, and report findings supported by evidence.
 Each case provides a briefing, evidence list, analyst objective, required tools,
 and reporting fields.
 
-- **120 minutes total** with one overall timer.
+- **150 minutes total (2.5 hours)** with one overall timer.
 - **Seven independent cases** containing **44 separate written-response questions**.
 - **100 points total**; most responses are short observations or explanations.
 - **Forward-only navigation:** finish the current case before moving on.
@@ -24,15 +24,15 @@ and reporting fields.
 
 | Case | Main area | Suggested time | Points |
 |---|---|---:|---:|
-| 1 — Library Triage | PE inspection, packing, hashes, address mapping, DLL execution | 18 min | 15 |
-| 2 — Host Activity Reconstruction | Procmon evidence and Regedit verification | 12 min | 10 |
-| 3 — Remote Loading Evidence Review | Interpret a supplied API worksheet | 12 min | 15 |
-| 4 — Unknown Artifact and Network Findings | Identify an artifact and analyze its application data | 15 min | 15 |
-| 5 — Packed Code and Debugger Behavior | Unpacking, debugger checks, and controlled execution | 23 min | 20 |
-| 6 — Code-Supported Behavior Assessment | Strings, code references, and branch reasoning | 20 min | 15 |
+| 1 — Library Triage | PE inspection, packing, hashes, address mapping, DLL execution | 25 min | 15 |
+| 2 — Host Activity Reconstruction | Procmon evidence and Regedit verification | 15 min | 10 |
+| 3 — Remote Loading Evidence Review | Interpret a supplied API worksheet | 15 min | 15 |
+| 4 — Unknown Artifact and Network Findings | Identify an artifact and analyze its application data | 20 min | 15 |
+| 5 — Packed Code and Debugger Behavior | Unpacking, debugger checks, and controlled execution | 25 min | 20 |
+| 6 — Code-Supported Behavior Assessment | Strings, code references, and branch reasoning | 25 min | 15 |
 | 7 — Scoped Detection and Record Recovery | Complete and test a YARA rule against a directory | 15 min | 10 |
-| Operational buffer | Tool, evidence, and submission overhead | 5 min | — |
-| **Total** | | **120 min** | **100** |
+| Operational buffer | Tool, evidence, and submission overhead | 10 min | — |
+| **Total** | | **150 min** | **100** |
 
 The case estimates are guidance, **not separate timers**. Use the buffer as needed;
 it does not allow you to reopen earlier cases. Follow D2L for the official schedule,
