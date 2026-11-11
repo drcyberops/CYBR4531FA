@@ -148,6 +148,18 @@ captures and repeated images of the same result.
 stating what it shows and why it supports your answer. Identify the question or
 finding it relates to. A screenshot by itself is not a complete answer.
 
+**For debugging screenshots, show the details you discuss.** Include the relevant
+instruction/call or branch address and enough surrounding code to establish
+context. If your explanation relies on a register, return value, branch outcome,
+memory location, or argument, make that value and its address/location visible
+and readable. Identify the relevant address(es) in your written explanation or
+clearly annotate the screenshot.
+
+**Partial credit can only be awarded for work supported by visible evidence and
+your explanation.** If a detail is cropped out, unreadable, or not identified and
+discussed, the instructor cannot verify that part of your work. Do not expect
+credit for a claim about code or a value that the submitted evidence does not show.
+
 The Case 5 debugger screenshot is still required. For other questions, concise
 written observations and relevant text output are sufficient unless the question
 specifically requests an image. Focus on clear evidence, not the number of images.
