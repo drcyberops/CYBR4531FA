@@ -128,6 +128,9 @@ Relevant observed event row/detail:
 ```
 
 - Use **actual observed values**. PIDs and loaded addresses can differ between runs.
+- **Screenshots are required for process/runtime values that vary between runs**,
+  including PIDs, parent PIDs, loaded bases/addresses, debugger values, and live
+  timestamps used to support an ordering claim. See the evidence requirements below.
 - Include only relevant output or event details and identify their source.
 - A conclusion needs support; a tool name or an unsupported statement is not evidence.
 - Enter your answers, commands, event details, and YARA rules **directly in the D2L
@@ -137,16 +140,40 @@ Relevant observed event row/detail:
   controls remain available, but you are not expected to upload separate answer files.
 - One screenshot is required for the Case 5 debugger success demonstration, showing
   the MessageBox together with x32dbg identifying the supplied file. Other
-  screenshots are optional unless the instructor announces otherwise.
+  screenshots are also required for the variable-value and code-address findings
+  described below; use screenshots selectively for other findings.
 - Retain required text such as a rule or command when the question requests it;
   an optional screenshot does not replace that text.
 
 ### Screenshots: be selective and explain them
 
-**Screenshots may be included, but you do not need to screenshot everything.**
-Choose a screenshot only when it helps support a specific finding. Keep the
+**Show the required process/runtime evidence, but do not screenshot everything.**
+Use a few focused screenshots to support specific findings. Keep the
 relevant tool, filename, field, or output readable; avoid unnecessary full-desktop
 captures and repeated images of the same result.
+
+#### Required evidence for variable values
+
+| Finding | What the screenshot must show |
+|---|---|
+| PID, parent PID, or thread ID used in your answer | The relevant process/thread identity and the actual identifiers; show the parent/child relationship when claimed. |
+| Loaded module base or runtime/memory address | The process/module/file identity and the observed base or address used in the finding. |
+| Debugger register, flag, return value, or branch finding | Relevant instruction/call/branch addresses, the values you discuss, and enough surrounding context. |
+| Event ordering based on a live Procmon capture | The relevant event rows, timestamps, process context, and other fields supporting the order. |
+| Function or code address cited from Ghidra | The analyzed file/function, visible address, and relevant code supporting the finding. |
+
+A typed PID, parent PID, or other variable value **alone is not sufficient**.
+For a calculated runtime address, show the observed input/base in the image and
+write the calculation in the answer. Show variable before/after state when your
+conclusion relies on it.
+
+**One clear image may support several related values or answers.** If reusing an
+image, identify the question containing it and cite it from the related answers.
+You do not need a separate screenshot for each number.
+
+Fixed values intrinsic to the supplied files, capture, or synthetic worksheet can
+still be reported as text with source/event references unless an image is requested.
+For example, a supplied worksheet PID is different from a PID observed in your own run.
 
 **Every screenshot must have a short explanation**—usually one or two sentences
 stating what it shows and why it supports your answer. Identify the question or
@@ -180,9 +207,10 @@ your explanation.** If a detail is cropped out, unreadable, or not identified an
 discussed, the instructor cannot verify that part of your work. Do not expect
 credit for a claim about code or a value that the submitted evidence does not show.
 
-The Case 5 debugger screenshot is still required. For other questions, concise
-written observations and relevant text output are sufficient unless the question
-specifically requests an image. Focus on clear evidence, not the number of images.
+The Case 5 success screenshot and the variable-value/code-address evidence above
+are required. For other findings, concise written observations and relevant text
+output are sufficient unless the question requests an image. Focus on clear
+evidence, not the number of images.
 
 ## Before exam day
 
@@ -193,6 +221,10 @@ specifically requests an image. Focus on clear evidence, not the number of image
 - Be comfortable making a short, labeled report rather than a long narrative.
 
 Download the final-exam package from the instructor's D2L area before starting,
-as directed. **Each case's extraction password appears on its own D2L page.**
+as directed. The main ZIP has a separate **primary password**, provided in D2L's
+download instructions before the timer starts. Use 7-Zip to open it. The case ZIPs
+inside still require their own passwords: **each case's extraction password appears
+on its own D2L page**. Copy the long, case-sensitive passwords carefully; the primary
+password does not unlock the individual cases.
 Do not assume the repository's general lab-sample password applies to final-exam
 archives. Contact the instructor about technical problems before advancing.
